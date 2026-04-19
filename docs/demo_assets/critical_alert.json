@@ -1,0 +1,17 @@
+{
+  "alert_id": "demo-shock-0001",
+  "meter_id": "MTR-00999",
+  "feeder_id": "FEED-21",
+  "coords": [12.9716, 77.5946],
+  "expected_recovered_kwh": 1500,
+  "expected_revenue_inr": 10500,
+  "timestamp": "2026-04-09T10:15:00Z",
+  "summary": "Sustained under-reporting with bypass signature detected",
+  "timeseries": [
+    {"t": "2026-04-09T09:15:00Z", "kWh": 2.1},
+    {"t": "2026-04-09T09:30:00Z", "kWh": 2.0},
+    {"t": "2026-04-09T09:45:00Z", "kWh": 1.9},
+    {"t": "2026-04-09T10:00:00Z", "kWh": 0.2},
+    {"t": "2026-04-09T10:15:00Z", "kWh": 0.1}
+  ]
+}

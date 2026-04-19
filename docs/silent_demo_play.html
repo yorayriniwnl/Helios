@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Silent Demo Play</title>
+  <style>
+    :root{--bg:#0f172a;--card:#0b1220;--muted:#9aa6bf;--accent:#4d96ff}
+    html,body{height:100%;margin:0;background:var(--bg);color:#fff;font-family:Inter,Segoe UI,Arial,sans-serif}
+    .wrap{display:flex;flex-direction:column;height:100%;align-items:center;justify-content:center;padding:24px}
+    .slide{width:100%;max-width:1100px;background:var(--card);border-radius:12px;padding:28px;box-shadow:0 10px 30px rgba(2,6,23,.6)}
+    .title{font-size:28px;margin:0 0 6px}
+    .subtitle{color:var(--muted);margin:0 0 18px}
+    .mock{height:280px;border-radius:8px;background:linear-gradient(135deg,#111827,#0b1220);display:flex;align-items:center;justify-content:center;color:#e6eef8;font-weight:700;margin-bottom:16px}
+    .caption{color:var(--muted);line-height:1.5}
+    .progress{height:6px;background:#071028;border-radius:6px;margin:12px 0;overflow:hidden}
+    .bar{height:100%;background:var(--accent);width:0%;transition:width .1s linear}
+    .cta{margin-top:14px;color:var(--accent);font-weight:600}
+    .controls{position:fixed;left:16px;bottom:16px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="slide" id="slide">
+      <h1 class="title" id="title">Starting...</h1>
+      <p class="subtitle" id="subtitle">A self-running, silent demo. Space = pause/resume.</p>
+      <div class="mock" id="mock">UI preview</div>
+      <div class="caption" id="caption">Preparing slides…</div>
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <div class="cta" id="cta"></div>
+    </div>
+  </div>
+  <div class="controls">Space: pause • ←/→: prev/next • F: fullscreen</div>
+
+  <script>
+    const slides = [
+      {title: "We detect critical issues before customers notice.", subtitle: "Real-time detection highlights severity and impact.", caption: "Impacted service: payments-api • Users affected: high", duration: 8000, mockText: "ALERT: payments-api"},
+      {title: "We show root cause and who must act.", subtitle: "Pinpointed cause with top evidence snapshots.", caption: "Root cause: stuck deployment • Suggested owner: Platform SRE", duration: 9000, mockText: "ROOT CAUSE: deployment/42"},
+      {title: "We give step-by-step remediation.", subtitle: "High-impact first step highlighted for quick wins.", caption: "Step 1: Roll back release • Step 2: Restart workers", duration: 10000, mockText: "REMEDIATION: rollback → restart"},
+      {title: "We record everything for audit and learning.", subtitle: "Full timeline, logs, and post-incident actions.", caption: "Evidence: logs • Trace links • Ticket created", duration: 7000, mockText: "AUDIT: ticket #1234"}
+    ];
+
+    let idx = 0; let paused = false; let startTs = 0; let curDur = 0; let rafId = null;
+
+    const titleEl = document.getElementById('title');
+    const subtitleEl = document.getElementById('subtitle');
+    const captionEl = document.getElementById('caption');
+    const mockEl = document.getElementById('mock');
+    const barEl = document.getElementById('bar');
+    const ctaEl = document.getElementById('cta');
+
+    function render(i){
+      const s = slides[i];
+      titleEl.textContent = s.title;
+      subtitleEl.textContent = s.subtitle;
+      captionEl.textContent = s.caption;
+      mockEl.textContent = s.mockText;
+      ctaEl.textContent = i===2 ? 'Highlight: one-click remediation (demo)' : '';
+      barEl.style.width = '0%';
+      curDur = s.duration;
+      startTs = performance.now();
+      tick();
+    }
+
+    function tick(){
+      if(paused) return;
+      const elapsed = performance.now() - startTs;
+      const pct = Math.min(100, (elapsed / curDur) * 100);
+      barEl.style.width = pct + '%';
+      if(elapsed >= curDur){ next(); return; }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function next(){ cancelAnimationFrame(rafId); idx = (idx + 1) % slides.length; render(idx); }
+    function prev(){ cancelAnimationFrame(rafId); idx = (idx - 1 + slides.length) % slides.length; render(idx); }
+    function togglePause(){ paused = !paused; if(!paused){ startTs = performance.now() - (parseFloat(barEl.style.width)/100)*curDur; tick(); } }
+
+    document.addEventListener('keydown', (e)=>{
+      if(e.code === 'Space'){ e.preventDefault(); togglePause(); }
+      if(e.key === 'ArrowRight'){ next(); }
+      if(e.key === 'ArrowLeft'){ prev(); }
+      if(e.key.toLowerCase() === 'f'){ document.documentElement.requestFullscreen().catch(()=>{}); }
+    });
+
+    // start
+    render(0);
+  </script>
+</body>
+</html>
