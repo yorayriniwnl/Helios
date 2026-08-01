@@ -1,0 +1,125 @@
+/* ============================================================
+   Helios — animation & utility styles
+   Loaded globally alongside globals.css
+   ============================================================ */
+
+/* ── Live feed pulse (new alert / reading row) ────────────── */
+@keyframes helios-pulse-in {
+  0%   { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  60%  { opacity: 1; transform: translateY(1px)  scale(1.005); }
+  100% { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+.animate-pulse-in {
+  animation: helios-pulse-in 0.38s ease-out forwards;
+}
+
+/* ── Severity ring pulse (critical badge) ─────────────────── */
+@keyframes helios-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55); }
+  60%       { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+}
+
+.animate-severity-ring {
+  animation: helios-ring 1.6s ease-in-out infinite;
+}
+
+/* ── Fade-in (panels, drawers) ────────────────────────────── */
+@keyframes helios-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: helios-fade-in 0.25s ease-out forwards;
+}
+
+/* ── Slide-up (toast / guided demo tooltip) ──────────────── */
+@keyframes helios-slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: helios-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Skeleton shimmer ─────────────────────────────────────── */
+@keyframes helios-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.05) 25%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0.05) 75%
+  );
+  background-size: 800px 100%;
+  animation: helios-shimmer 1.6s infinite linear;
+}
+
+/* ── Demo highlight overlay ───────────────────────────────── */
+.demo-highlight-target {
+  outline: 2.5px solid #facc15 !important;
+  outline-offset: 3px !important;
+  border-radius: 4px !important;
+  transition: outline 0.15s ease;
+}
+
+/* ── WS status dot ────────────────────────────────────────── */
+.ws-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ws-dot--open       { background: #22c55e; }
+.ws-dot--connecting { background: #facc15; animation: helios-ring 1.4s ease-in-out infinite; }
+.ws-dot--closed,
+.ws-dot--error      { background: #ef4444; }
+.ws-dot--demo       { background: #a78bfa; }
+
+/* ── KPI card number counter animation ───────────────────── */
+@keyframes helios-count-up {
+  from { opacity: 0.3; transform: scale(0.94); }
+  to   { opacity: 1;   transform: scale(1); }
+}
+
+.animate-count-up {
+  animation: helios-count-up 0.4s ease-out forwards;
+}
+
+/* ── Offline banner slide-down ───────────────────────────── */
+@keyframes helios-banner-in {
+  from { max-height: 0; opacity: 0; }
+  to   { max-height: 80px; opacity: 1; }
+}
+
+.animate-banner-in {
+  animation: helios-banner-in 0.35s ease-out forwards;
+  overflow: hidden;
+}
+
+/* ── Spinner (used by <Spinner /> component) ─────────────── */
+@keyframes helios-spin {
+  to { transform: rotate(360deg); }
+}
+
+.helios-spinner {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: helios-spin 0.7s linear infinite;
+}
+
+/* ── Map heatmap layer z-index fix ──────────────────────── */
+.leaflet-heatmap-layer {
+  z-index: 200;
+}

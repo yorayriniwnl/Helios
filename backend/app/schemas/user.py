@@ -1,0 +1,19 @@
+from typing import Optional
+
+from pydantic import BaseModel, EmailStr, Field
+
+
+class UserCreate(BaseModel):
+    name: str
+    email: EmailStr
+    password: str = Field(..., min_length=8)
+
+
+class UserResponse(BaseModel):
+    id: int
+    name: str
+    email: EmailStr
+    is_active: bool = True
+    role_id: Optional[int] = None
+
+    model_config = {"from_attributes": True}

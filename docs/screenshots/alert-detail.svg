@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600">
+  <rect width="1000" height="600" fill="#071222" />
+  <text x="40" y="60" fill="#fff" font-size="22" font-family="Segoe UI, Arial">Alert Detail (placeholder)</text>
+
+  <g transform="translate(40,100)">
+    <rect width="600" height="80" rx="8" fill="#071a2a" stroke="#2b3948" />
+    <text x="16" y="30" fill="#fecaca" font-size="15" font-family="Segoe UI, Arial">High — Sustained under-reporting, suspected bypass signature</text>
+    <text x="16" y="56" fill="#94a3b8" font-size="12" font-family="Segoe UI, Arial">Meter HZ-01-001 &#8226; Score 0.97 &#8226; Zone Northside</text>
+  </g>
+
+  <g transform="translate(40,200)">
+    <rect width="290" height="160" rx="8" fill="#0b1220" stroke="#334155" />
+    <text x="16" y="26" fill="#93c5fd" font-size="13" font-family="Segoe UI, Arial">Root cause</text>
+    <text x="16" y="52" fill="#e6eef8" font-size="13" font-family="Segoe UI, Arial">Possible tampering</text>
+    <text x="16" y="72" fill="#94a3b8" font-size="11" font-family="Segoe UI, Arial">Confidence: 98%</text>
+    <text x="16" y="100" fill="#93c5fd" font-size="13" font-family="Segoe UI, Arial">Recommended action</text>
+    <text x="16" y="122" fill="#e6eef8" font-size="12" font-family="Segoe UI, Arial">Isolate device, open incident,</text>
+    <text x="16" y="138" fill="#e6eef8" font-size="12" font-family="Segoe UI, Arial">dispatch inspector</text>
+  </g>
+
+  <g transform="translate(350,200)">
+    <rect width="290" height="160" rx="8" fill="#0b1220" stroke="#334155" />
+    <text x="16" y="26" fill="#6ee7b7" font-size="13" font-family="Segoe UI, Arial">Estimated recovery</text>
+    <text x="16" y="60" fill="#fff" font-size="26" font-family="Segoe UI, Arial" font-weight="bold">&#8377;10,500</text>
+    <text x="16" y="82" fill="#94a3b8" font-size="12" font-family="Segoe UI, Arial">~1,500 kWh</text>
+    <text x="16" y="112" fill="#93c5fd" font-size="13" font-family="Segoe UI, Arial">Status</text>
+    <text x="16" y="134" fill="#e6eef8" font-size="12" font-family="Segoe UI, Arial">Open &#8594; assign to inspector</text>
+  </g>
+
+  <g transform="translate(40,390)">
+    <rect width="600" height="120" rx="8" fill="#0b1220" stroke="#334155" />
+    <text x="16" y="26" fill="#93c5fd" font-size="13" font-family="Segoe UI, Arial">Reading history</text>
+    <polyline points="16,90 90,70 164,40 238,55 312,30 386,45 460,20 534,25" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="40" y="570" fill="#94a3b8" font-size="11" font-family="Segoe UI, Arial">Placeholder image — replace with a real alert-detail screenshot.</text>
+</svg>
