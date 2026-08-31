@@ -50,7 +50,7 @@ export default function Sidebar() {
   }[connStatus]
 
   return (
-    <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-[linear-gradient(180deg,rgba(11,18,32,0.94),rgba(7,14,24,0.98))] px-4 py-5 md:flex md:flex-col md:gap-6">
+    <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-[linear-gradient(180deg,rgba(22,3,3,0.82),rgba(0,0,0,0.98))] px-4 py-5 md:flex md:flex-col md:gap-6">
       <Link
         href="/"
         className="rounded-[24px] border border-white/10 bg-white/[0.03] p-4 shadow-[0_18px_36px_rgba(2,6,23,0.28)] transition-transform hover:-translate-y-0.5"
@@ -58,7 +58,7 @@ export default function Sidebar() {
         <div className="flex items-center gap-3">
           <span
             className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10"
-            style={{ background: 'linear-gradient(135deg, rgba(94,234,212,0.18), rgba(96,165,250,0.18))', color: 'var(--fg)' }}
+            style={{ background: 'linear-gradient(135deg, rgba(103,21,21,0.72), rgba(232,75,75,0.18))', color: 'var(--fg)' }}
           >
             <BoltIcon className="h-5 w-5" />
           </span>

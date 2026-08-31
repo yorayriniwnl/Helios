@@ -16,8 +16,8 @@
 
 /* ── Severity ring pulse (critical badge) ─────────────────── */
 @keyframes helios-ring {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55); }
-  60%       { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 75, 75, 0.55); }
+  60%       { box-shadow: 0 0 0 6px rgba(232, 75, 75, 0); }
 }
 
 .animate-severity-ring {
@@ -63,7 +63,7 @@
 
 /* ── Demo highlight overlay ───────────────────────────────── */
 .demo-highlight-target {
-  outline: 2.5px solid #facc15 !important;
+  outline: 2.5px solid #ff8a7f !important;
   outline-offset: 3px !important;
   border-radius: 4px !important;
   transition: outline 0.15s ease;
@@ -77,11 +77,11 @@
   border-radius: 50%;
   flex-shrink: 0;
 }
-.ws-dot--open       { background: #22c55e; }
-.ws-dot--connecting { background: #facc15; animation: helios-ring 1.4s ease-in-out infinite; }
+.ws-dot--open       { background: #ff8a7f; }
+.ws-dot--connecting { background: #e84b4b; animation: helios-ring 1.4s ease-in-out infinite; }
 .ws-dot--closed,
-.ws-dot--error      { background: #ef4444; }
-.ws-dot--demo       { background: #a78bfa; }
+.ws-dot--error      { background: #e84b4b; }
+.ws-dot--demo       { background: #ff8a7f; }
 
 /* ── KPI card number counter animation ───────────────────── */
 @keyframes helios-count-up {

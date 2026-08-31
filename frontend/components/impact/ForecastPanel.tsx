@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { get } from '../../lib/api'
+import { isDemoModeEnabled } from '../../lib/demo'
 import Spinner from '../ui/Spinner'
 import ErrorMessage from '../ui/ErrorMessage'
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts'
@@ -73,7 +74,7 @@ export default function ForecastPanel() {
 
         setData(preds)
       } catch (err: any) {
-        setError(err?.message || 'Failed to compute forecast')
+        if (!isDemoModeEnabled()) setError(err?.message || 'Failed to compute forecast')
       } finally {
         if (mounted) setLoading(false)
       }
@@ -100,13 +101,13 @@ export default function ForecastPanel() {
       <p className="text-sm text-[var(--muted)] mb-3">A lightweight projection for demo purposes (basic regression on recent alerts).</p>
 
       <div style={{ width: '100%', height: 200 }}>
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} initialDimension={{ width: 1, height: 1 }}>
           <LineChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" opacity={0.06} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" opacity={0.36} />
             <XAxis dataKey="time" tick={{ fontSize: 11 }} interval={3} />
             <YAxis domain={[0, 100]} tickFormatter={formatPercentTick} />
             <Tooltip formatter={formatPercentTooltip} />
-            <Line type="monotone" dataKey="prob" stroke="#fb7185" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="prob" stroke="#ff8a7f" strokeWidth={2} dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </div>

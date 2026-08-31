@@ -44,14 +44,14 @@ function severityLabel(s: string | undefined) {
 function severityColor(s: string | undefined) {
   switch (s) {
     case 'critical':
-      return '#ff6b6b'
+      return '#e84b4b'
     case 'high':
-      return '#ff8a65'
+      return '#ff8a7f'
     case 'medium':
-      return '#f6c84c'
+      return '#e7bd78'
     case 'low':
     default:
-      return '#34d399'
+      return '#c4c4c4'
   }
 }
 
@@ -231,7 +231,7 @@ export default function LiveFeed({ maxItems = 100 }: { maxItems?: number }) {
                 </div>
 
                 <div className="text-xs text-[var(--muted)] self-start">
-                  <div style={{ background: color, color: '#02141a', padding: '6px 8px', borderRadius: 6, fontWeight: 700, minWidth: 72, textAlign: 'center' }}>{severityLabel(it.severity)}</div>
+                  <div style={{ background: color, color: '#000000', padding: '6px 8px', borderRadius: 6, fontWeight: 700, minWidth: 72, textAlign: 'center' }}>{severityLabel(it.severity)}</div>
                 </div>
               </li>
             )

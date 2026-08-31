@@ -8,13 +8,16 @@ import React from 'react'
 import OfflineBanner from '../components/ui/OfflineBanner'
 
 export const metadata = {
-  title: 'Helios',
-  description: 'Real-time energy monitoring and anomaly detection.',
-  themeColor: '#0b1220',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  title: 'Helios // Energy Intelligence',
+  description: 'A YOR-styled command surface for meter telemetry, anomaly triage, and field response.',
+  themeColor: '#000000',
+  icons: { icon: '/icon.svg' },
   openGraph: {
-    title: 'Helios',
-    description: 'Real-time energy monitoring and anomaly detection.',
+    title: 'Helios // Energy Intelligence',
+    description: 'Meter telemetry, anomaly triage, and field response in one command surface.',
     type: 'website',
+    images: ['/icon.svg'],
   },
 }
 
@@ -24,13 +27,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased min-h-screen">
         <div className="min-h-screen flex flex-col">
           <OfflineBanner />
-          <main className="flex-1 w-full transition-colors duration-300">
+          <div className="flex-1 w-full transition-colors duration-300">
             <div className="container mx-auto py-6">
               {children}
             </div>
-          </main>
-          <footer className="py-4 text-center text-sm" style={{ color: 'var(--muted)' }}>
-            © {new Date().getFullYear()} Helios
+          </div>
+          <footer className="technical py-4 text-center text-[10px]" style={{ color: 'var(--muted)' }}>
+            HELIOS // YOR VISUAL SYSTEM // DEMO SURFACE // © {new Date().getFullYear()}
           </footer>
         </div>
       </body>

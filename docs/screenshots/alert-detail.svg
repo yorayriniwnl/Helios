@@ -1,37 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600">
-  <rect width="1000" height="600" fill="#071222" />
-  <text x="40" y="60" fill="#fff" font-size="22" font-family="Segoe UI, Arial">Alert Detail (placeholder)</text>
-
-  <g transform="translate(40,100)">
-    <rect width="600" height="80" rx="8" fill="#071a2a" stroke="#2b3948" />
-    <text x="16" y="30" fill="#fecaca" font-size="15" font-family="Segoe UI, Arial">High — Sustained under-reporting, suspected bypass signature</text>
-    <text x="16" y="56" fill="#94a3b8" font-size="12" font-family="Segoe UI, Arial">Meter HZ-01-001 &#8226; Score 0.97 &#8226; Zone Northside</text>
-  </g>
-
-  <g transform="translate(40,200)">
-    <rect width="290" height="160" rx="8" fill="#0b1220" stroke="#334155" />
-    <text x="16" y="26" fill="#93c5fd" font-size="13" font-family="Segoe UI, Arial">Root cause</text>
-    <text x="16" y="52" fill="#e6eef8" font-size="13" font-family="Segoe UI, Arial">Possible tampering</text>
-    <text x="16" y="72" fill="#94a3b8" font-size="11" font-family="Segoe UI, Arial">Confidence: 98%</text>
-    <text x="16" y="100" fill="#93c5fd" font-size="13" font-family="Segoe UI, Arial">Recommended action</text>
-    <text x="16" y="122" fill="#e6eef8" font-size="12" font-family="Segoe UI, Arial">Isolate device, open incident,</text>
-    <text x="16" y="138" fill="#e6eef8" font-size="12" font-family="Segoe UI, Arial">dispatch inspector</text>
-  </g>
-
-  <g transform="translate(350,200)">
-    <rect width="290" height="160" rx="8" fill="#0b1220" stroke="#334155" />
-    <text x="16" y="26" fill="#6ee7b7" font-size="13" font-family="Segoe UI, Arial">Estimated recovery</text>
-    <text x="16" y="60" fill="#fff" font-size="26" font-family="Segoe UI, Arial" font-weight="bold">&#8377;10,500</text>
-    <text x="16" y="82" fill="#94a3b8" font-size="12" font-family="Segoe UI, Arial">~1,500 kWh</text>
-    <text x="16" y="112" fill="#93c5fd" font-size="13" font-family="Segoe UI, Arial">Status</text>
-    <text x="16" y="134" fill="#e6eef8" font-size="12" font-family="Segoe UI, Arial">Open &#8594; assign to inspector</text>
-  </g>
-
-  <g transform="translate(40,390)">
-    <rect width="600" height="120" rx="8" fill="#0b1220" stroke="#334155" />
-    <text x="16" y="26" fill="#93c5fd" font-size="13" font-family="Segoe UI, Arial">Reading history</text>
-    <polyline points="16,90 90,70 164,40 238,55 312,30 386,45 460,20 534,25" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
-
-  <text x="40" y="570" fill="#94a3b8" font-size="11" font-family="Segoe UI, Arial">Placeholder image — replace with a real alert-detail screenshot.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+  <title id="title">Helios alert detail preview</title><desc id="desc">A code-authored alert detail and evidence preview for the Helios command surface.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#000"/><stop offset="1" stop-color="#160303"/></linearGradient><linearGradient id="signal" x1="0" x2="1"><stop stop-color="#671515"/><stop offset="1" stop-color="#ff8a7f"/></linearGradient></defs>
+  <rect width="1000" height="600" fill="url(#bg)"/><rect x="28" y="28" width="944" height="544" rx="7" fill="#050505" stroke="#f5eaea" stroke-opacity=".17"/>
+  <text x="60" y="76" fill="#c4c4c4" font-family="monospace" font-size="11" letter-spacing="3">HELIOS // CASE DETAIL // SAMPLE</text><text x="60" y="122" fill="#f5eaea" font-family="Georgia,serif" font-size="34">High-power anomaly</text><text x="60" y="151" fill="#c4c4c4" font-family="monospace" font-size="12">METER M-104  ·  ZONE E  ·  SCORE 0.82  ·  OPEN</text>
+  <g transform="translate(60 190)"><rect width="270" height="172" rx="6" fill="#671515" fill-opacity=".58" stroke="#e84b4b" stroke-opacity=".6"/><text x="20" y="34" fill="#ff8a7f" font-family="monospace" font-size="11" letter-spacing="2">DECISION CONTEXT</text><text x="20" y="70" fill="#f5eaea" font-family="Georgia,serif" font-size="22">Transformer stress</text><text x="20" y="103" fill="#c4c4c4" font-family="Inter,Arial" font-size="12">Inspect the asset and compare</text><text x="20" y="121" fill="#c4c4c4" font-family="Inter,Arial" font-size="12">neighboring meter traces.</text><text x="20" y="151" fill="#ff8a7f" font-family="monospace" font-size="10">REPORTED / NOT PROVEN</text></g>
+  <g transform="translate(350 190)"><rect width="270" height="172" rx="6" fill="#050505" stroke="#f5eaea" stroke-opacity=".14"/><text x="20" y="34" fill="#c4c4c4" font-family="monospace" font-size="11" letter-spacing="2">RESPONSE PATH</text><text x="20" y="70" fill="#f5eaea" font-family="Georgia,serif" font-size="22">Assign inspector</text><text x="20" y="103" fill="#c4c4c4" font-family="Inter,Arial" font-size="12">1. Verify the reading</text><text x="20" y="123" fill="#c4c4c4" font-family="Inter,Arial" font-size="12">2. Attach field evidence</text><rect x="20" y="140" width="128" height="22" rx="11" fill="url(#signal)"/><text x="84" y="155" text-anchor="middle" fill="#000" font-family="monospace" font-size="10">ASSIGN →</text></g>
+  <g transform="translate(640 190)"><rect width="300" height="172" rx="6" fill="#050505" stroke="#f5eaea" stroke-opacity=".14"/><text x="20" y="34" fill="#c4c4c4" font-family="monospace" font-size="11" letter-spacing="2">EVIDENCE STATUS</text><text x="20" y="75" fill="#ff8a7f" font-family="Georgia,serif" font-size="26">Awaiting capture</text><text x="20" y="111" fill="#c4c4c4" font-family="Inter,Arial" font-size="12">Photos, notes, timestamp, and GPS</text><text x="20" y="130" fill="#c4c4c4" font-family="Inter,Arial" font-size="12">remain attached to the case.</text><text x="20" y="157" fill="#c4c4c4" font-family="monospace" font-size="10">DEMO FLOW AVAILABLE</text></g>
+  <g transform="translate(60 396)"><rect width="880" height="112" rx="6" fill="#050505" stroke="#f5eaea" stroke-opacity=".14"/><text x="20" y="32" fill="#f5eaea" font-family="Georgia,serif" font-size="20">Reading history</text><path d="M20 85 120 74 220 82 320 45 420 62 520 28 620 54 720 22 860 40" fill="none" stroke="url(#signal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="720" cy="22" r="5" fill="#ff8a7f"/></g>
+  <text x="60" y="548" fill="#c4c4c4" font-family="monospace" font-size="10" letter-spacing="1">CODE-AUTHORED UI PREVIEW // SYNTHETIC VALUES // DETECTION IS NOT PROOF OF FAULT</text>
 </svg>

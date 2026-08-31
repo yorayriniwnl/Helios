@@ -33,7 +33,7 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-white/10 bg-[rgba(11,18,32,0.82)] backdrop-blur-xl">
+    <header className="sticky top-0 z-30 border-b border-white/10 bg-[rgba(0,0,0,0.86)] backdrop-blur-xl">
       <div className="flex flex-col gap-4 px-4 py-4 md:px-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
@@ -41,7 +41,7 @@ export default function Header() {
               <Link href="/" className="inline-flex items-center gap-3">
                 <span
                   className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 shadow-[0_12px_32px_rgba(15,23,42,0.35)]"
-                  style={{ background: 'linear-gradient(135deg, rgba(94,234,212,0.24), rgba(59,130,246,0.2))', color: 'var(--fg)' }}
+                  style={{ background: 'linear-gradient(135deg, rgba(103,21,21,0.72), rgba(232,75,75,0.18))', color: 'var(--fg)' }}
                 >
                   <BoltIcon className="h-5 w-5" />
                 </span>
@@ -94,7 +94,7 @@ export default function Header() {
             <div className="hidden items-center gap-3 rounded-full border border-white/10 bg-white/5 px-2 py-1.5 sm:flex">
               <span
                 className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold"
-                style={{ background: 'linear-gradient(135deg, rgba(94,234,212,0.24), rgba(96,165,250,0.3))', color: 'var(--fg)' }}
+                style={{ background: 'linear-gradient(135deg, rgba(103,21,21,0.72), rgba(255,138,127,0.2))', color: 'var(--fg)' }}
               >
                 {initials}
               </span>

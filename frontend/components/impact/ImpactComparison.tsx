@@ -42,15 +42,15 @@ export default function ImpactComparison() {
       <p className="text-sm text-[var(--muted)] mb-3">Mocked estimates for demo purposes — values are realistic but simulated.</p>
 
       <div style={{ width: '100%', height: 280 }}>
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} initialDimension={{ width: 1, height: 1 }}>
           <BarChart data={DATA} margin={{ top: 8, right: 16, left: 0, bottom: 40 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" opacity={0.06} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" opacity={0.36} />
             <XAxis dataKey="name" tick={{ fontSize: 12 }} />
             <YAxis tickFormatter={formatCurrencyTick} />
             <Tooltip formatter={formatTooltipValue} />
             <Legend />
-            <Bar dataKey="before" name="Losses — Before Detection" fill="#ef4444" />
-            <Bar dataKey="after" name="Losses — After Detection" fill="#34d399" />
+            <Bar dataKey="before" name="Losses — Before Detection" fill="#e84b4b" />
+            <Bar dataKey="after" name="Losses — After Detection" fill="#c4c4c4" />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -10,11 +10,11 @@ function FloatingNodes({ count = 8 }: { count?: number }) {
     const out: { base: THREE.Vector3; seed: number; color: string }[] = []
     for (let i = 0; i < count; i++) {
       const angle = (i / count) * Math.PI * 2
-      const radius = 1.6 + Math.random() * 1.0
+      const radius = 1.6 + ((i * 17) % 10) / 10
       const x = Math.cos(angle) * radius
-      const y = (Math.random() - 0.5) * 0.6
+      const y = ((((i * 13) % 10) / 10) - 0.5) * 0.6
       const z = Math.sin(angle) * radius
-      out.push({ base: new THREE.Vector3(x, y, z), seed: Math.random() * 1000, color: ['#6ef', '#4ff', '#9f6'][i % 3] })
+      out.push({ base: new THREE.Vector3(x, y, z), seed: i * 1.618, color: ['#e84b4b', '#ff8a7f', '#671515'][i % 3] })
     }
     return out
   }, [count])
@@ -84,7 +84,7 @@ function FloatingNodes({ count = 8 }: { count?: number }) {
           }}
         >
           <bufferGeometry />
-          <lineBasicMaterial color="#66f6ff" transparent opacity={0.6} />
+          <lineBasicMaterial color="#ff8a7f" transparent opacity={0.52} />
         </lineSegments>
       ))}
     </group>

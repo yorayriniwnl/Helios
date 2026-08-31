@@ -1,171 +1,104 @@
-# Helios — Intelligent Energy Monitoring
+# Helios // Energy Intelligence
 
-Helios is a modern energy-monitoring platform that detects anomalies in meter readings, surfaces realtime alerts, and provides a polished dashboard for operators and stakeholders.
+> **STATUS: DEMO / EXPERIMENTAL** — Helios is a code-ready operator surface for meter telemetry, anomaly triage, and field response. The repository includes a deterministic browser demo; a hosted deployment is not claimed.
 
-**Pitch:** Bright insights, fewer outages — Helios turns noisy meter data into actionable alerts and clear operational dashboards. Ideal for utilities and grid operators who need fast detection and rich visualizations.
+Helios makes the path from a suspicious meter signal to an actionable response legible: ingest a reading, score an anomaly, persist the case, broadcast the update, and give an operator enough context to investigate. The interface is intentionally built as a command surface rather than a generic analytics dashboard.
 
-## Problem
+![Helios YOR hero](assets/hero.svg)
 
-Many operators cannot reliably detect and investigate anomalous energy consumption patterns in real time. Alerts are noisy, triage is manual, and correlating events across meters and zones is time-consuming.
+## What is implemented
 
-## Solution
+- FastAPI REST routes under `/api/v1` for auth, meters, readings, alerts, anomalies, zones, dashboard summaries, recommendations, and sync actions.
+- A WebSocket channel at `/ws/live` for reading, alert, and anomaly frames.
+- Next.js App Router frontend with dashboard, alert triage, meter, zone, and analytics views.
+- Deterministic local demo mode that emits synthetic frames without requiring a live backend.
+- Responsive YOR visual system with a reduced-motion alternative, visible status vocabulary, and semantic severity colors.
+- PostgreSQL-first backend configuration with SQLite available for local development; Redis is optional for realtime support.
 
-Helios ingests meter readings, applies rule-based and ML-assisted anomaly detection, and presents prioritized alerts and geospatial visualizations so teams can respond faster and reduce downtime.
+The demo surface is useful for reviewing navigation, layout, and client-side signal handling. It does not turn synthetic events into evidence of real grid behavior.
 
-Key capabilities:
-- Realtime alerting via WebSocket and REST API
-- Geospatial zone and hotspot visualizations with heatmap overlays
-- Drill-down analytics per zone and meter (usage, anomalies, top meters)
-- Demo mode with synthetic data for quick demos or hackathons
+## Signal path
 
-## Architecture
+![Helios architecture](assets/architecture.svg)
 
-- Backend: FastAPI, SQLAlchemy, Uvicorn
-	- Database: PostgreSQL recommended (SQLite fallback for local dev)
-	- Realtime: WebSocket endpoint (`/ws/live`) for push alerts and readings
-	- ML: pluggable detection engine (simple rules + optional ML model)
-- Frontend: Next.js (App Router), TypeScript, Tailwind CSS, Recharts, Leaflet (maps)
-- Dev infra: Docker Compose for quick local stacks (Postgres + Redis + services)
+The intended runtime path is:
 
-Diagram (high level):
-
-- Meter -> Ingest API -> DB -> Detection Engine -> Alerts -> Web UI / WebSocket
-
-## Features
-
-- Meter ingestion and historical reading storage
-- Rule-based and ML-assisted anomaly detection
-- Realtime alerts stream (WS) and REST endpoints
-- Interactive dashboard: KPIs, trend charts, alert feed
-- Geospatial heatmap, zones and hotspot overlays
-- Drill-down analytics and top-meters per zone
-- Demo mode (simulated data + live demo emitter)
-- Docker + local development support
-
-## Demo & Presentation Steps
-
-Quick demo (Docker):
-
-```bash
-# Build and start services
-docker compose up --build
-
-# Optional: seed demo data
-docker compose exec backend python scripts/seed.py
+```text
+meter / simulator → FastAPI ingest → anomaly detection → SQLAlchemy store
+                                      ↘ WebSocket → Next.js operator surface
 ```
 
-Local one-command demo (no Docker):
+Detection output is a triage signal. It is not, by itself, proof of tampering, equipment failure, recovered value, or avoided downtime. Field verification and an appropriately configured production environment remain separate requirements.
 
-PowerShell:
+## Evidence ledger
+
+| Surface | Status | Evidence / boundary |
+| --- | --- | --- |
+| Frontend production build | **VERIFIED** | `npm run build --prefix frontend` completes and generates the current App Router routes. |
+| YOR token contract | **VERIFIED** | `npm run design:check` validates `design/yor-tokens.json`. |
+| Browser demo emitter | **VERIFIED** | `frontend/lib/demo.ts` emits deterministic local reading and alert frames. |
+| Backend integration | **REPORTED** | Frontend request and WebSocket boundaries mirror the repository's FastAPI routes; run the backend locally before treating this as an integrated deployment. |
+| Hosted URL / uptime | **UNVERIFIED** | No live URL is published in this repository. |
+| Production telemetry / recovery metrics | **NOT CLAIMED** | The repository contains no validated production dataset or operational measurement. |
+
+## UI previews
+
+The images below are code-authored compositions of the current interaction model. They are deliberately labeled as synthetic or illustrative; they are not screenshots of production telemetry.
+
+![Dashboard preview](docs/screenshots/dashboard.svg)
+![Alert triage preview](docs/screenshots/alerts.svg)
+![Alert detail preview](docs/screenshots/alert-detail.svg)
+![Mobile evidence preview](docs/screenshots/mobile-evidence.svg)
+
+## Local frontend check
 
 ```powershell
-.\run-demo.ps1
+npm ci --prefix frontend
+npm run design:check
+npm run build --prefix frontend
+npm run start --prefix frontend
 ```
 
-Bash / macOS / WSL:
+Open `http://localhost:3000/`. The dashboard routes can be inspected without a backend by entering demo mode from the login screen or by opening `/dashboard?demo=silent`.
 
-```bash
-./run-demo.sh
+For a full local stack, use Docker Compose or the repository's setup scripts after configuring the backend environment. The frontend defaults to `http://localhost:8000`; set `NEXT_PUBLIC_API_URL` when the API lives elsewhere.
+
+## Demo mode
+
+Demo mode is intentionally local and repeatable. It stores only the `helios.demo` flag in browser storage and broadcasts synthetic frames through the shared client listener. Use it to inspect the interaction choreography, not to validate backend persistence or field evidence.
+
+## Runtime boundaries
+
+- Production requires a real `DATABASE_URL`, a strong `JWT_SECRET`, and an explicit CORS allow-list. The backend is expected to refuse unsafe production configuration.
+- SQLite is a local-development fallback, not a claim of durable serverless production storage.
+- The optional ML/detection hooks are architecture seams; model quality, calibration, and field accuracy require a separately versioned dataset and evaluation protocol.
+- Demo credentials, if seeded by a local script, are for local testing only. Never reuse them in a public deployment.
+- No image, location, alert, financial, or uptime metric in the previews should be read as operational evidence.
+
+## API surface
+
+- `GET /health` and `GET /ready`
+- `POST /api/v1/auth/login`
+- `GET /api/v1/meters`, `GET /api/v1/readings/by-meter/{meter_id}`
+- `GET /api/v1/alerts`, `POST /api/v1/alerts/{alert_id}/assign`, `PATCH /api/v1/alerts/{alert_id}/resolve`
+- `GET /api/v1/anomalies`, `GET /api/v1/zones`, `GET /api/v1/dashboard`
+- `ws://<host>/ws/live`
+
+## Repository map
+
+```text
+frontend/        Next.js operator surface and deterministic demo emitter
+backend/         FastAPI service, persistence, auth, and WebSocket routes
+data-simulator/  local reading generation
+ml-engine/       detection-related seams and experiments
+docs/            evidence-labeled visual references
+design/          shared YOR visual tokens and contract check
 ```
 
-Local dev (frontend only):
+## Attribution and contributions
 
-```bash
-npm run setup
-NEXT_PUBLIC_API_URL=http://localhost:8000 npm run dev
-```
-
-The root `package.json` forwards commands to `frontend/`, so running `npm run dev` from the repository root now starts the Helios frontend instead of any unrelated parent-level npm project.
-
-Demo Mode (fast demo without backend):
-
-1. Open the dashboard at `http://localhost:3000`.
-2. Toggle the **Demo** control in the top-right of the dashboard header to ON.
-	 - The toggle persists to `localStorage['helios.demo']` and automatically starts an in-browser demo engine that emits synthetic readings and alerts.
-3. Watch the Live Feed, Heatmap, and KPIs update in real time — ideal for presentations or hackathons.
-
-Alternative (manual):
-
-```js
-// enable demo mode in the browser console
-localStorage.setItem('helios.demo', '1')
-window.location.reload()
-```
-
-## Hackathon Quick Start — one command
-
-PowerShell (Windows):
-
-```powershell
-.\hackathon_setup.ps1
-```
-
-macOS / Linux / WSL:
-
-```bash
-./hackathon_setup.sh
-```
-
-What the script does:
-- Creates a Python virtualenv at `backend/.venv` (if missing)
-- Installs backend Python dependencies from `backend/requirements.txt`
-- Installs frontend packages (`npm ci` in `frontend`) if `npm` is available
-- Runs the demo seeder: `backend/scripts/seed.py --fast`
-
-Demo video
-
-- Watch a short walkthrough here: https://youtu.be/REPLACE_WITH_YOUR_VIDEO
-
-## How to Capture Screenshots for Slides
-
-Replace the placeholder images in the `docs/screenshots/` folder with real captures.
-
-![Dashboard screenshot placeholder](docs/screenshots/dashboard.svg)
-![Alert feed screenshot placeholder](docs/screenshots/alerts.svg)
-
-_Tip:_ Use 1366×768 or 1920×1080 for presentation-ready screenshots.
-
-## Useful Endpoints
-
-- Health: `GET /health`
-- API base: `/api/v1`
-- Alerts: `GET /api/v1/alerts`
-- Readings by meter: `GET /api/v1/readings/by-meter/{meter_id}`
-- WebSocket: `ws://<host>/ws/live`
-
-## Pitch (Short)
-
-Helios: Cut noise, find risk — a realtime energy intelligence platform that gets teams from data to action in minutes.
-
-## Contributing
-
-Contributions are welcome. Open issues or PRs for feature requests, bug fixes or documentation improvements. For demo-mode improvements, see `frontend/lib/demo.ts`.
-
-## Deployment
-
-Quick deployment checklist and notes:
-
-- **Environment:** Set `ENV=production` (or `HELIOS_ENV=production`) when running in production.
-- **Critical env vars:** `DATABASE_URL` (must be a production database, not sqlite), `JWT_SECRET` (at least 16 chars), `REDIS_URL` (optional), and `CORS_ALLOWED_ORIGINS`.
-- **Migrations:** If you changed models (indexes or schema), generate and apply Alembic migrations before deploying:
-
-```bash
-cd backend
-# create a new revision then apply it
-alembic revision --autogenerate -m "describe changes"
-alembic upgrade head
-```
-
-- **Build & run (Docker):**
-
-```bash
-cd backend
-docker build -t helios-backend .
-docker run -e ENV=production -e DATABASE_URL="postgresql://user:pass@db:5432/helios" -e JWT_SECRET="<strong-secret>" -p 8000:8000 helios-backend
-```
-
-- **Notes:** The backend validates critical settings at startup and will refuse to start in `production` without a valid `DATABASE_URL` and `JWT_SECRET` to avoid accidental insecure deployments.
+Helios may contain contributions from more than one author. Preserve existing attribution and review history when extending it. Open a focused issue or pull request with the behavior, test evidence, and deployment assumptions stated explicitly.
 
 ## License
 
-This project is provided under an open-source license — add your chosen license file to the repo.
+No license is declared yet. Treat the repository as all-rights-reserved until an explicit license file is added.

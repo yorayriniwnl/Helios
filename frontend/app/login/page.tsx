@@ -37,7 +37,8 @@ export default function LoginPage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[var(--bg)]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(94,234,212,0.14),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.16),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_42%)]" />
+      <div className="pointer-events-none absolute inset-0 telemetry-grid opacity-50" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(232,75,75,0.16),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(103,21,21,0.22),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_42%)]" />
 
       <div className="relative mx-auto grid min-h-screen max-w-6xl gap-10 px-4 py-8 lg:grid-cols-[1.05fr,440px] lg:items-center">
         <section className="space-y-8">
@@ -50,7 +51,7 @@ export default function LoginPage() {
               Operator access
             </div>
 
-            <h1 className="max-w-3xl text-4xl font-semibold leading-tight text-[var(--fg)] md:text-5xl lg:text-6xl">
+            <h1 className="display-serif max-w-3xl text-4xl font-semibold leading-tight text-[var(--fg)] md:text-5xl lg:text-6xl">
               Sign in to the Helios command center.
             </h1>
             <p className="max-w-2xl text-base leading-7 text-[var(--muted)] md:text-lg">
@@ -98,7 +99,7 @@ export default function LoginPage() {
           <div className="mb-6 flex items-center gap-3">
             <span
               className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10"
-              style={{ background: 'linear-gradient(135deg, rgba(94,234,212,0.2), rgba(96,165,250,0.22))', color: 'var(--fg)' }}
+              style={{ background: 'linear-gradient(135deg, rgba(103,21,21,0.72), rgba(232,75,75,0.18))', color: 'var(--fg)' }}
             >
               <BoltIcon className="h-5 w-5" />
             </span>
@@ -161,13 +162,13 @@ export default function LoginPage() {
                 disabled={loading}
                 className="w-full rounded-full py-3 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-50"
                 style={{
-                  background: loading ? 'rgba(94,234,212,0.5)' : 'var(--accent)',
-                  color: '#0b1220',
+                  background: loading ? 'rgba(232,75,75,0.5)' : 'var(--accent)',
+                  color: '#000000',
                 }}
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
-                    <span className="helios-spinner" style={{ borderTopColor: '#0b1220', width: '14px', height: '14px' }} />
+                    <span className="helios-spinner" style={{ borderTopColor: '#000000', width: '14px', height: '14px' }} />
                     Signing in...
                   </span>
                 ) : 'Sign in'}

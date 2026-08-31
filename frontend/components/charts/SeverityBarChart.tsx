@@ -26,7 +26,7 @@ export default function SeverityBarChart({
   data,
   xKey = 'name',
   categories = ['low', 'medium', 'high'],
-  colors = ['#34d399', '#f59e0b', '#fb7185'],
+  colors = ['#c4c4c4', '#e7bd78', '#ff8a7f'],
   height = 220,
   stacked = true,
   className = '',
@@ -41,7 +41,7 @@ export default function SeverityBarChart({
     <div className={`card ${className}`}>
       <div style={{ width: '100%', height }}>
         {isMounted ? (
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0} initialDimension={{ width: 1, height: 1 }}>
             <BarChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
               <CartesianGrid stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3" />
               <XAxis dataKey={xKey} stroke="var(--muted)" tick={{ fontSize: 12 }} />

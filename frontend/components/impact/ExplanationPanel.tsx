@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { get } from '../../lib/api'
 import { addWebSocketListener, connectWebSocket } from '../../lib/websocket'
+import { isDemoModeEnabled } from '../../lib/demo'
 import Spinner from '../ui/Spinner'
 import ErrorMessage from '../ui/ErrorMessage'
 
@@ -82,7 +83,7 @@ function ExplanationPanel() {
         setAlert(first)
       } catch (err: any) {
         if (!mounted) return
-        setError(err?.message || 'Failed to load explanation')
+        if (!isDemoModeEnabled()) setError(err?.message || 'Failed to load explanation')
       } finally {
         if (mounted) setLoading(false)
       }
@@ -101,12 +102,12 @@ function ExplanationPanel() {
     return () => { mounted = false }
   }, [])
 
-  if (loading) return <div className="card"><div className="py-6 flex justify-center"><Spinner /></div></div>
-  if (error) return <div className="card"><ErrorMessage message={error} /></div>
-
   const ex = useMemo(() => explain(alert || {}), [alert])
   const conf = useMemo(() => mapConfidence(alert?.score), [alert?.score])
   const barColor = conf.pct >= 85 ? 'bg-red-500' : conf.pct >= 60 ? 'bg-yellow-400' : 'bg-green-400'
+
+  if (loading) return <div className="card"><div className="py-6 flex justify-center"><Spinner /></div></div>
+  if (error) return <div className="card"><ErrorMessage message={error} /></div>
 
   return (
     <div className="card">

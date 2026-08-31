@@ -62,7 +62,7 @@ export default function MeterDetailPage() {
       setError(null)
       try {
         const [m, an] = await Promise.all([
-          get(`/meters/${meterId}`).catch(() => null),
+          get<Meter>(`/meters/${meterId}`).catch(() => null),
           get<any[]>(`/anomalies?meter_id=${meterId}`).catch(() => []),
         ])
         if (!mounted) return

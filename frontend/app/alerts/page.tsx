@@ -121,7 +121,7 @@ export default function AlertsPage() {
       return
     }
     try {
-      const res = await post(`/alerts/${alertId}/assign`, { user_id: userId })
+      const res = await post<AlertItem>(`/alerts/${alertId}/assign`, { user_id: userId })
       setAlerts((prev) => prev.map((item) => (item.id === res.id ? res : item)))
     } catch (err: any) {
       alert(err?.message || 'Assign failed')
@@ -131,7 +131,7 @@ export default function AlertsPage() {
   async function handleResolve(alertId: number) {
     const notes = window.prompt('Resolution notes (optional):', '')
     try {
-      const res = await patch(`/alerts/${alertId}/resolve`, { notes })
+      const res = await patch<AlertItem>(`/alerts/${alertId}/resolve`, { notes })
       setAlerts((prev) => prev.map((item) => (item.id === res.id ? res : item)))
     } catch (err: any) {
       alert(err?.message || 'Resolve failed')
@@ -168,7 +168,7 @@ export default function AlertsPage() {
           <button
             onClick={() => {
               setLoading(true)
-              get('/alerts', undefined, { cacheMs: 10000 })
+              get<AlertItem[]>('/alerts', undefined, { cacheMs: 10000 })
                 .then((result) => setAlerts(result || []))
                 .catch((err) => setError(err?.message || 'Failed'))
                 .finally(() => setLoading(false))

@@ -131,16 +131,16 @@ export default function ZoneComparison() {
 
   const chart = (
     <div style={{ width: '100%', height: 320 }}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" minWidth={0} initialDimension={{ width: 1, height: 1 }}>
         <BarChart data={chartData} margin={{ top: 8, right: 16, left: 0, bottom: 40 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" opacity={0.06} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" opacity={0.36} />
           <XAxis dataKey="name" tick={{ fontSize: 12 }} />
           <YAxis yAxisId="left" tickFormatter={formatLossTick} />
           <YAxis yAxisId="right" orientation="right" tickFormatter={(value) => `${value}`} />
           <Tooltip formatter={formatTooltipValue} />
           <Legend />
-          <Bar yAxisId="left" dataKey="loss" name="Est. Loss (INR)" fill="#fb7185" />
-          <Bar yAxisId="right" dataKey="alerts" name="# Alerts" fill="#34d399" />
+          <Bar yAxisId="left" dataKey="loss" name="Est. Loss (INR)" fill="#ff8a7f" />
+          <Bar yAxisId="right" dataKey="alerts" name="# Alerts" fill="#c4c4c4" />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -24,7 +24,7 @@ function severityColor(s: string | undefined) {
       return '#f6c84c'
     case 'low':
     default:
-      return '#34d399'
+      return '#ff8a7f'
   }
 }
 
@@ -80,13 +80,13 @@ function AvatarScene({ alert }: { alert?: any }) {
       {/* body */}
       <mesh position={[0, -0.25, 0]}> 
         <cylinderGeometry args={[0.28, 0.34, 0.4, 12]} />
-        <meshStandardMaterial color="#0b1220" metalness={0.2} roughness={0.6} />
+        <meshStandardMaterial color="#050505" metalness={0.2} roughness={0.6} />
       </mesh>
 
       {/* head */}
       <mesh ref={head} position={[0, 0.15, 0]}> 
         <sphereGeometry args={[0.22, 24, 24]} />
-        <meshStandardMaterial color="#e6eef8" metalness={0.1} roughness={0.5} />
+        <meshStandardMaterial color="#f5eaea" metalness={0.1} roughness={0.5} />
       </mesh>
 
       {/* eyes */}

@@ -136,7 +136,7 @@ export default function ZoneHeatmap({ columns = 4 }: { columns?: number }) {
         <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${columns} gap-4`}>
           {zones.map((z) => {
             const norm = maxDensity > 0 ? Math.min(1, z.anomaly_density / maxDensity) : 0
-            const color = gradientColor('#34d399', '#ef4444', norm)
+            const color = gradientColor('#671515', '#e84b4b', norm)
             const textColor = norm > 0.6 ? 'text-white' : 'text-black'
             return (
               <button key={z.id} onClick={() => openZone(z)} className="rounded-lg p-4 shadow-sm transform hover:-translate-y-1 transition-transform" style={{ background: color }}>

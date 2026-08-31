@@ -34,18 +34,19 @@ export default function Home() {
 
   return (
     <main className="relative overflow-hidden px-4 py-6 md:px-8 md:py-8">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(94,234,212,0.12),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.12),transparent_22%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_45%)]" />
+      <div className="pointer-events-none absolute inset-0 telemetry-grid opacity-60" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(232,75,75,0.16),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(103,21,21,0.22),transparent_22%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_45%)]" />
 
       <div className="relative mx-auto flex max-w-7xl flex-col gap-6">
-        <section className="overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,rgba(8,15,28,0.94),rgba(12,22,38,0.92))] p-6 shadow-[0_24px_64px_rgba(2,6,23,0.35)] md:p-8 lg:p-10">
+        <section className="overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,rgba(22,3,3,0.96),rgba(5,5,5,0.94))] p-6 shadow-[0_24px_64px_rgba(0,0,0,0.6)] md:p-8 lg:p-10">
           <div className="grid items-center gap-10 xl:grid-cols-[1.05fr,0.95fr]">
-            <div className="space-y-7">
+            <div className="min-w-0 space-y-7">
               <div className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.28em] leading-none text-[var(--muted)]">
                 Energy intelligence for live operations
               </div>
 
               <div className="space-y-4">
-                <h1 className="max-w-3xl text-4xl font-semibold leading-tight text-[var(--fg)] md:text-5xl lg:text-6xl">
+                <h1 className="display-serif max-w-3xl text-4xl font-semibold leading-tight text-[var(--fg)] md:text-5xl lg:text-6xl">
                   Spot grid instability before it becomes downtime.
                 </h1>
                 <p className="max-w-2xl text-base leading-7 text-[var(--muted)] md:text-lg">
@@ -75,8 +76,8 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="space-y-4">
-              <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-4">
+            <div className="min-w-0 space-y-4">
+              <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(103,21,21,0.28),rgba(255,255,255,0.02))] p-4">
                 <ThreeHero />
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
@@ -104,7 +105,7 @@ export default function Home() {
         </section>
 
         <section className="grid gap-6 xl:grid-cols-[1.08fr,0.92fr]">
-          <div className="overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(12,18,32,0.92),rgba(11,18,32,0.84))] shadow-[0_24px_64px_rgba(2,6,23,0.28)]">
+          <div className="overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(22,3,3,0.7),rgba(5,5,5,0.88))] shadow-[0_24px_64px_rgba(0,0,0,0.5)]">
             <div className="border-b border-white/10 px-6 py-5">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
@@ -139,7 +140,7 @@ export default function Home() {
                     Selected zone
                   </div>
                   <div className="mt-2 text-2xl font-semibold text-[var(--fg)]">{selectedZone.label}</div>
-                  <div className="mt-3 inline-flex rounded-full bg-white/6 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: selectedZone.risk >= 0.8 ? '#fb7185' : selectedZone.risk >= 0.6 ? '#fbbf24' : '#5eead4' }}>
+                  <div className="mt-3 inline-flex rounded-full bg-white/6 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: selectedZone.risk >= 0.8 ? 'var(--accent)' : selectedZone.risk >= 0.6 ? 'var(--status-warn)' : 'var(--accent-2)' }}>
                     {getZoneRiskLabel(selectedZone.risk)} risk
                   </div>
                   <p className="mt-4 text-sm leading-6 text-[var(--muted)]">
@@ -174,7 +175,7 @@ export default function Home() {
 
           <div className="space-y-6">
             {HOME_PAGE_GROUPS.map((group) => (
-              <section key={group.title} className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] p-6 shadow-[0_18px_40px_rgba(2,6,23,0.22)]">
+              <section key={group.title} className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(103,21,21,0.16),rgba(255,255,255,0.015))] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.38)]">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.28em] leading-none text-[var(--muted)]">
                     Route group
@@ -226,7 +227,7 @@ export default function Home() {
               <Link
                 key={workflow.title}
                 href={workflow.href}
-                className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] p-6 transition-transform hover:-translate-y-1"
+                className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(103,21,21,0.14),rgba(255,255,255,0.015))] p-6 transition-transform hover:-translate-y-1"
               >
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-[var(--accent)]">
                   <Icon className="h-5 w-5" />

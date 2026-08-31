@@ -74,14 +74,14 @@ export default function ShockAlertButton() {
         onClick={handleTrigger}
         disabled={firing}
         className="inline-flex items-center gap-2 h-8 px-3 rounded-full text-xs font-semibold transition-all disabled:opacity-60"
-        style={{ background: 'rgba(255,60,60,0.12)', border: '1px solid rgba(255,60,60,0.4)', color: '#ff6b6b' }}
+        style={{ background: 'rgba(103,21,21,0.4)', border: '1px solid rgba(232,75,75,0.5)', color: 'var(--accent-2)' }}
         title="Trigger a live high-value anomaly for a presentation moment"
       >
         Trigger live anomaly
       </button>
       {banner && (
         <div className="helios-shock-banner" role="alert">
-          <div className="text-xs uppercase tracking-wide" style={{ color: '#ff6b6b', letterSpacing: '0.06em' }}>
+          <div className="text-xs uppercase tracking-wide" style={{ color: 'var(--accent-2)', letterSpacing: '0.06em' }}>
             Live anomaly detected
           </div>
           <div className="mt-1.5 text-sm leading-snug" style={{ color: 'var(--fg)' }}>

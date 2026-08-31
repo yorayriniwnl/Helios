@@ -9,16 +9,25 @@ module.exports = {
     extend: {
       colors: {
         accent: {
-          DEFAULT: '#5eead4',
-          500: '#34d399',
+          DEFAULT: '#e84b4b',
+          500: '#ff8a7f',
+        },
+        yor: {
+          void: '#000000',
+          panel: '#050505',
+          crimson: '#e84b4b',
+          deep: '#671515',
+          signal: '#ff8a7f',
+          paper: '#f5eaea',
+          muted: '#c4c4c4',
         },
       },
       borderRadius: {
         xl: '14px',
       },
       boxShadow: {
-        'card-lg': '0 18px 40px rgba(2,6,23,0.65)',
-        'soft-lg': '0 8px 30px rgba(2,6,23,0.35)'
+        'card-lg': '0 18px 40px rgba(0,0,0,0.72), 0 0 28px rgba(103,21,21,0.22)',
+        'soft-lg': '0 8px 30px rgba(0,0,0,0.45)'
       },
       spacing: {
         18: '4.5rem',

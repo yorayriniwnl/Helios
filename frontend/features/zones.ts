@@ -38,11 +38,11 @@ export function zoneRiskFromDensity(density: number): ZoneRisk {
 
 export function densityHexColor(density: number): string {
   const t = Math.max(0, Math.min(1, density / 3))
-  if (t >= 0.8) return '#ef4444'   // red
-  if (t >= 0.6) return '#fb7185'   // rose
-  if (t >= 0.4) return '#f97316'   // orange
-  if (t >= 0.2) return '#f59e0b'   // amber
-  return '#34d399'                  // green
+  if (t >= 0.8) return '#e84b4b'   // critical signal
+  if (t >= 0.6) return '#ff8a7f'   // high signal
+  if (t >= 0.4) return '#e7bd78'   // semantic warning
+  if (t >= 0.2) return '#b92b2b'   // secondary crimson
+  return '#671515'                  // low signal
 }
 
 // ─── Loss percentage formatting ──────────────────────────────────────────────

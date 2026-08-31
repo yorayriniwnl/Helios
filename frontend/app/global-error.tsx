@@ -9,7 +9,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
 
   return (
     <html lang="en">
-      <body style={{ margin: 0, background: '#0b1220', color: '#e6eef8', fontFamily: 'system-ui, -apple-system, Arial, sans-serif' }}>
+      <body style={{ margin: 0, background: '#000000', color: '#f5eaea', fontFamily: 'Inter, system-ui, -apple-system, Arial, sans-serif' }}>
         <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
           <div
             style={{
@@ -22,14 +22,14 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
             }}
           >
             <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Helios hit an unexpected error</h2>
-            <p style={{ fontSize: 14, color: '#94a3b8', marginBottom: 20 }}>
+            <p style={{ fontSize: 14, color: '#c4c4c4', marginBottom: 20 }}>
               Reloading usually resolves this. If it keeps happening, restart the app.
             </p>
             <button
               onClick={() => reset()}
               style={{
-                background: '#5eead4',
-                color: '#052e21',
+                background: '#e84b4b',
+                color: '#000000',
                 border: 'none',
                 borderRadius: 999,
                 padding: '10px 20px',

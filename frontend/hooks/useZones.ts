@@ -6,6 +6,7 @@
  */
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { get } from '../lib/api'
+import { isDemoModeEnabled } from '../lib/demo'
 import type { ApiZone, ZoneOverview } from '../types/api'
 
 export interface UseZonesOptions {
@@ -48,7 +49,7 @@ export function useZones(opts: UseZonesOptions = {}): UseZonesResult {
       }
       if (isMounted.current) setZones(data)
     } catch (e: any) {
-      if (isMounted.current) setError(e?.message ?? 'Failed to load zones')
+      if (isMounted.current && !isDemoModeEnabled()) setError(e?.message ?? 'Failed to load zones')
     } finally {
       if (isMounted.current) setLoading(false)
     }

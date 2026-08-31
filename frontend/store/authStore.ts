@@ -76,7 +76,7 @@ export const useAuthStore = create<AuthState>()(
         const decoded = decodeJwt(token)
         if (decoded && decoded.user_id) {
           try {
-            user = await get(`/users/${decoded.user_id}`)
+            user = await get<Exclude<AuthUser, null>>(`/users/${decoded.user_id}`)
           } catch (e) {
             // ignore profile fetch errors
           }

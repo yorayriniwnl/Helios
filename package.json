@@ -6,6 +6,7 @@
     "dev": "npm --prefix frontend run dev --",
     "build": "npm --prefix frontend run build --",
     "start": "npm --prefix frontend run start --",
-    "lint": "npm --prefix frontend run lint --"
+    "lint": "npm --prefix frontend run lint --",
+    "design:check": "node scripts/check-design-tokens.mjs"
   }
 }

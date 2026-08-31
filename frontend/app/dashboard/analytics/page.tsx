@@ -13,7 +13,7 @@ import EmptyState from '../../../components/ui/EmptyState'
 import { severityFromScore } from '../../../features/alerts'
 import { sortZonesByRisk } from '../../../features/zones'
 
-const CHART_COLORS = { low: '#34d399', medium: '#f59e0b', high: '#fb7185', critical: '#ef4444' }
+const CHART_COLORS = { low: '#c4c4c4', medium: '#e7bd78', high: '#ff8a7f', critical: '#e84b4b' }
 
 export default function AnalyticsPage() {
   const { summary, recovery, loading: loadingDash, error: errorDash } = useDashboard()
@@ -99,12 +99,12 @@ export default function AnalyticsPage() {
       <div className="rounded-xl p-4" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
         <h2 className="font-semibold text-sm mb-4">Alert Trend — 14 Days</h2>
         {loadingAlerts ? <Skeleton height={220} /> : (
-          <ResponsiveContainer width="100%" height={220}>
+          <ResponsiveContainer width="100%" height={220} minWidth={0} initialDimension={{ width: 1, height: 1 }}>
             <BarChart data={trendData} margin={{ top: 4, right: 8, bottom: 4, left: -8 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
               <XAxis dataKey="name" tick={{ fontSize: 10, fill: 'var(--muted)' }} tickLine={false} />
               <YAxis tick={{ fontSize: 10, fill: 'var(--muted)' }} tickLine={false} axisLine={false} />
-              <Tooltip contentStyle={{ background: '#0b1220', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, fontSize: 12 }} />
+              <Tooltip contentStyle={{ background: '#050505', border: '1px solid rgba(245,234,234,0.14)', borderRadius: 8, fontSize: 12 }} />
               <Legend iconSize={8} wrapperStyle={{ fontSize: 11 }} />
               {(['low', 'medium', 'high', 'critical'] as const).map((sev) => (
                 <Bar key={sev} dataKey={sev} stackId="a" fill={CHART_COLORS[sev]} radius={sev === 'critical' ? [3, 3, 0, 0] : [0, 0, 0, 0]} />
@@ -118,12 +118,12 @@ export default function AnalyticsPage() {
       <div className="rounded-xl p-4" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
         <h2 className="font-semibold text-sm mb-4">Total Alerts per Day</h2>
         {loadingAlerts ? <Skeleton height={180} /> : (
-          <ResponsiveContainer width="100%" height={180}>
+          <ResponsiveContainer width="100%" height={180} minWidth={0} initialDimension={{ width: 1, height: 1 }}>
             <LineChart data={trendData} margin={{ top: 4, right: 8, bottom: 4, left: -8 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
               <XAxis dataKey="name" tick={{ fontSize: 10, fill: 'var(--muted)' }} tickLine={false} />
               <YAxis tick={{ fontSize: 10, fill: 'var(--muted)' }} tickLine={false} axisLine={false} />
-              <Tooltip contentStyle={{ background: '#0b1220', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, fontSize: 12 }} />
+              <Tooltip contentStyle={{ background: '#050505', border: '1px solid rgba(245,234,234,0.14)', borderRadius: 8, fontSize: 12 }} />
               <Line type="monotone" dataKey="total" stroke="var(--accent)" strokeWidth={2} dot={false} />
             </LineChart>
           </ResponsiveContainer>
@@ -134,14 +134,14 @@ export default function AnalyticsPage() {
       <div className="rounded-xl p-4" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
         <h2 className="font-semibold text-sm mb-4">Zone Alert & Anomaly Counts</h2>
         {loadingZones ? <Skeleton height={200} /> : zoneData.length === 0 ? <EmptyState message="No zone data." /> : (
-          <ResponsiveContainer width="100%" height={200}>
+          <ResponsiveContainer width="100%" height={200} minWidth={0} initialDimension={{ width: 1, height: 1 }}>
             <BarChart data={zoneData} layout="vertical" margin={{ top: 4, right: 8, bottom: 4, left: 40 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
               <XAxis type="number" tick={{ fontSize: 10, fill: 'var(--muted)' }} tickLine={false} />
               <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: 'var(--muted)' }} tickLine={false} width={68} />
-              <Tooltip contentStyle={{ background: '#0b1220', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, fontSize: 12 }} />
+              <Tooltip contentStyle={{ background: '#050505', border: '1px solid rgba(245,234,234,0.14)', borderRadius: 8, fontSize: 12 }} />
               <Legend iconSize={8} wrapperStyle={{ fontSize: 11 }} />
-              <Bar dataKey="alerts"    fill="#fb7185" radius={[0, 3, 3, 0]} name="Alerts" />
+              <Bar dataKey="alerts"    fill="#ff8a7f" radius={[0, 3, 3, 0]} name="Alerts" />
               <Bar dataKey="anomalies" fill="#f59e0b" radius={[0, 3, 3, 0]} name="Anomalies" />
             </BarChart>
           </ResponsiveContainer>

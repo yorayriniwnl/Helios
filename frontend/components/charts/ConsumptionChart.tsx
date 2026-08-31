@@ -75,7 +75,7 @@ export default function ConsumptionChart({
         <div className="py-12"><ErrorMessage message={error} /></div>
       ) : (
         <div style={{ width: '100%', height: 260 }}>
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0} initialDimension={{ width: 1, height: 1 }}>
             <LineChart data={chartData} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
               <CartesianGrid stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3" />
               <XAxis dataKey="time" tick={{ fill: 'var(--muted)' }} />

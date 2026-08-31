@@ -5,6 +5,7 @@ import { get, post, patch } from '../../lib/api'
 import Spinner from '../ui/Spinner'
 import ErrorMessage from '../ui/ErrorMessage'
 import useAuthStore from '../../store/authStore'
+import { isDemoModeEnabled } from '../../lib/demo'
 
 type AlertItem = {
   id: number
@@ -48,7 +49,7 @@ function OperatorWorkloadPanel() {
         setPriorityIds(pIds)
       } catch (err: any) {
         if (!mounted) return
-        setError(err?.message || 'Failed to load operator workload')
+        if (!isDemoModeEnabled()) setError(err?.message || 'Failed to load operator workload')
       } finally {
         if (mounted) setLoading(false)
       }
@@ -56,9 +57,6 @@ function OperatorWorkloadPanel() {
     load()
     return () => { mounted = false }
   }, [])
-
-  if (loading) return <div className="card"><div className="py-6 flex justify-center"><Spinner /></div></div>
-  if (error) return <div className="card"><ErrorMessage message={error} /></div>
 
   // Group by assigned_to (null -> unassigned) — memoized to avoid recalculation
   const groups = useMemo(() => {
@@ -85,11 +83,14 @@ function OperatorWorkloadPanel() {
     }).sort((a, b) => b.priority - a.priority || b.pending - a.pending)
   }, [groups, priorityIds])
 
+  if (loading) return <div className="card"><div className="py-6 flex justify-center"><Spinner /></div></div>
+  if (error) return <div className="card"><ErrorMessage message={error} /></div>
+
   async function handleAssign(alertId: number, toId?: number | null) {
     try {
       const userId = toId ?? Number(window.prompt('Assign to user id (numeric):') || '')
       if (!userId) return
-      const res = await post(`/alerts/${alertId}/assign`, { user_id: Number(userId) })
+      const res = await post<AlertItem>(`/alerts/${alertId}/assign`, { user_id: Number(userId) })
       setAlerts((prev) => prev.map((x) => (x.id === alertId ? { ...x, status: res.status || 'assigned', assigned_to: res.assigned_to ?? Number(userId) } : x)))
     } catch (e) {
       console.error('assign failed', e)
@@ -99,7 +100,7 @@ function OperatorWorkloadPanel() {
 
   async function handleResolve(alertId: number) {
     try {
-      const res = await patch(`/alerts/${alertId}/resolve`, { notes: 'Resolved via workload panel' })
+      const res = await patch<AlertItem>(`/alerts/${alertId}/resolve`, { notes: 'Resolved via workload panel' })
       setAlerts((prev) => prev.map((x) => (x.id === alertId ? { ...x, status: res.status || 'resolved' } : x)))
     } catch (e) {
       console.error('resolve failed', e)

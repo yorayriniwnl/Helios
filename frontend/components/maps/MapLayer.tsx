@@ -53,10 +53,10 @@ const FALLBACK_CENTER: LatLng = [12.9716, 77.5946] // Bengaluru — matches the 
 
 function densityColor(v: number) {
   const t = Math.max(0, Math.min(1, v))
-  if (t >= 0.8) return '#ef4444'
-  if (t >= 0.66) return '#fb7185'
-  if (t >= 0.33) return '#f59e0b'
-  return '#34d399'
+  if (t >= 0.8) return '#e84b4b'
+  if (t >= 0.66) return '#ff8a7f'
+  if (t >= 0.33) return '#e7bd78'
+  return '#671515'
 }
 
 function severityToNumber(a: Alert): number {

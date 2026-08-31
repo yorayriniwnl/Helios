@@ -7,7 +7,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { get } from '../lib/api'
 import { addWebSocketListener } from '../lib/websocket'
-import type { ApiReading } from '../types/api'
+import type { ApiReading, WsMessage } from '../types/api'
 
 export interface UseReadingsOptions {
   meterId: number | null
@@ -65,7 +65,7 @@ export function useReadings(opts: UseReadingsOptions): UseReadingsResult {
   useEffect(() => {
     if (!liveUpdates || meterId == null) return
 
-    const remove = addWebSocketListener((raw: string) => {
+    const remove = addWebSocketListener((raw: string | WsMessage) => {
       try {
         const msg = typeof raw === 'string' ? JSON.parse(raw) : raw
         if (msg?.type === 'reading' && msg.data?.meter_id === meterId) {

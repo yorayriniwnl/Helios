@@ -92,7 +92,7 @@ export default function DashboardPage() {
 
       {/* Main row: chart + live feed */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <section className="lg:col-span-2 space-y-6">
+        <section className="min-w-0 lg:col-span-2 space-y-6">
           <div
             className="rounded-xl p-4"
             style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}
@@ -110,12 +110,12 @@ export default function DashboardPage() {
             <SeverityBarChart
               data={severityData}
               categories={['low', 'medium', 'high', 'critical']}
-              colors={['#34d399', '#f59e0b', '#fb7185', '#ef4444']}
+              colors={['#671515', '#e7bd78', '#ff8a7f', '#e84b4b']}
             />
           </div>
         </section>
 
-        <section className="space-y-4">
+        <section className="min-w-0 space-y-4">
           <div data-demo-id="livefeed">
             <LiveFeed />
           </div>
@@ -126,9 +126,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Trend + zone map row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div
-          className="rounded-xl p-4 space-y-4"
+          className="min-w-0 rounded-xl p-4 space-y-4"
           style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}
           data-demo-id="trend"
         >
@@ -138,7 +138,7 @@ export default function DashboardPage() {
         </div>
 
         <div
-          className="rounded-xl p-4 space-y-4"
+          className="min-w-0 rounded-xl p-4 space-y-4"
           style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}
           data-demo-id="zones"
         >

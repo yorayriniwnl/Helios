@@ -188,7 +188,7 @@ export default function GuidedDemo() {
     <div className="inline-flex items-center gap-3">
       <button
         onClick={() => (running ? stop() : start())}
-        className={`btn-primary ${running ? 'bg-gradient-to-r from-[#fb7185] to-[#ef4444]' : ''}`}
+        className={`btn-primary ${running ? 'bg-gradient-to-r from-[#671515] to-[#e84b4b]' : ''}`}
       >
         {running ? 'End Demo' : 'Start Demo'}
       </button>

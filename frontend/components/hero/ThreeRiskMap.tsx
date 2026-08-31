@@ -23,7 +23,7 @@ function ZoneMeshes({ zones, onClick }: { zones: Zone[]; onClick?: (z: Zone) => 
       mesh.scale.set(pulse, 1, pulse)
       const mat = mesh.material as THREE.MeshStandardMaterial
       if (mat) {
-        mat.emissive = new THREE.Color(zone.risk > 0.6 ? '#ff5e5e' : zone.risk > 0.3 ? '#ffb86b' : '#66f6ff')
+        mat.emissive = new THREE.Color(zone.risk > 0.6 ? '#e84b4b' : zone.risk > 0.3 ? '#ff8a7f' : '#671515')
         mat.emissiveIntensity = 0.6 + zone.risk * 1.1 + (hovered === zone.id ? 0.6 : 0)
       }
       if (ring) {
@@ -46,7 +46,7 @@ function ZoneMeshes({ zones, onClick }: { zones: Zone[]; onClick?: (z: Zone) => 
             onPointerDown={(e) => { e.stopPropagation(); onClick && onClick(z) }}
           >
             <cylinderGeometry args={[z.radius, z.radius, 0.12, 32]} />
-            <meshStandardMaterial color={'#081026'} metalness={0.2} roughness={0.4} emissive={'#000'} emissiveIntensity={0.6} transparent />
+            <meshStandardMaterial color={'#050505'} metalness={0.2} roughness={0.4} emissive={'#000'} emissiveIntensity={0.6} transparent />
           </mesh>
 
           <mesh
@@ -57,7 +57,7 @@ function ZoneMeshes({ zones, onClick }: { zones: Zone[]; onClick?: (z: Zone) => 
             position={[0, 0.06, 0]}
           >
             <torusGeometry args={[z.radius + 0.03, 0.01, 8, 64]} />
-            <meshBasicMaterial color={z.risk > 0.6 ? '#ff5e5e' : z.risk > 0.3 ? '#ffb86b' : '#66f6ff'} transparent opacity={0.45} blending={THREE.AdditiveBlending} />
+            <meshBasicMaterial color={z.risk > 0.6 ? '#e84b4b' : z.risk > 0.3 ? '#ff8a7f' : '#671515'} transparent opacity={0.45} blending={THREE.AdditiveBlending} />
           </mesh>
 
           <Html position={[0, 0.2, 0]} center>
@@ -86,14 +86,14 @@ export default function ThreeRiskMap({ onZoneClick }: { onZoneClick?: (zone: Zon
   return (
     <div style={{ width: '100%', height: 420, borderRadius: 12, overflow: 'hidden' }}>
       <Canvas camera={{ position: [0, 6, 6], fov: 50 }} dpr={[1, 1.5]} shadows>
-        <color attach="background" args={["#041024"]} />
+        <color attach="background" args={["#000000"]} />
         <ambientLight intensity={0.6} />
         <directionalLight position={[5, 10, 5]} intensity={0.6} />
 
         <group rotation={[-Math.PI / 2, 0, 0]}>
           <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow position={[0, -0.01, 0]}>
             <planeGeometry args={[12, 12]} />
-            <meshStandardMaterial color="#071024" metalness={0.2} roughness={0.9} />
+            <meshStandardMaterial color="#050505" metalness={0.2} roughness={0.9} />
           </mesh>
 
           <ZoneMeshes zones={zones} onClick={(z) => onZoneClick && onZoneClick(z)} />

@@ -28,6 +28,11 @@ share/python-wheels/
 .installed.cfg
 *.egg
 
+# The frontend owns a committed TypeScript lib/ directory. Keep the Python
+# packaging ignore above from hiding it from Git.
+!frontend/lib/
+!frontend/lib/**
+
 # Virtual environments
 venv/
 .venv/

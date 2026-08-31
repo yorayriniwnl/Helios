@@ -17,12 +17,12 @@ export default function ErrorBoundary({ error, reset }: { error: Error & { diges
       >
         <div
           className="mx-auto mb-4 flex items-center justify-center rounded-full"
-          style={{ width: 48, height: 48, background: 'rgba(251,113,133,0.12)' }}
+          style={{ width: 48, height: 48, background: 'rgba(103,21,21,0.34)' }}
         >
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fb7185" strokeWidth={1.75}>
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent-2)" strokeWidth={1.75}>
             <path d="M12 4 2 20h20L12 4Z" />
             <path d="M12 10v5" />
-            <circle cx="12" cy="17.5" r="0.6" fill="#fb7185" />
+            <circle cx="12" cy="17.5" r="0.6" fill="var(--accent-2)" />
           </svg>
         </div>
         <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--fg)' }}>
@@ -36,7 +36,7 @@ export default function ErrorBoundary({ error, reset }: { error: Error & { diges
           <button
             onClick={() => reset()}
             className="px-4 py-2 rounded-full text-sm font-semibold"
-            style={{ background: 'var(--accent)', color: '#052e21' }}
+            style={{ background: 'var(--accent)', color: '#000000' }}
           >
             Try again
           </button>

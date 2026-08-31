@@ -6,7 +6,8 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { get, patch, post } from '../lib/api'
 import { addWebSocketListener } from '../lib/websocket'
-import type { ApiAlert, AlertSeverity, AlertStatus } from '../types/api'
+import { isDemoModeEnabled } from '../lib/demo'
+import type { ApiAlert, AlertSeverity, AlertStatus, WsMessage } from '../types/api'
 
 export interface AlertFilters {
   severity?: AlertSeverity | ''
@@ -59,7 +60,7 @@ export function useAlerts(filters: AlertFilters = {}): UseAlertsResult {
         setTotal(data.total ?? data.items.length)
       }
     } catch (e: any) {
-      if (isMounted.current) setError(e?.message ?? 'Failed to load alerts')
+      if (isMounted.current && !isDemoModeEnabled()) setError(e?.message ?? 'Failed to load alerts')
     } finally {
       if (isMounted.current) setLoading(false)
     }
@@ -72,9 +73,9 @@ export function useAlerts(filters: AlertFilters = {}): UseAlertsResult {
 
   // Prepend real-time alerts from WebSocket
   useEffect(() => {
-    const remove = addWebSocketListener((raw: string) => {
+    const remove = addWebSocketListener((raw: string | WsMessage) => {
       try {
-        const msg = JSON.parse(raw)
+        const msg = typeof raw === 'string' ? JSON.parse(raw) : raw
         if (msg.type === 'alert' && msg.data) {
           const incoming: ApiAlert = msg.data
           if (!isMounted.current) return

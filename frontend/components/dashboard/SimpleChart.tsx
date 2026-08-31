@@ -18,7 +18,7 @@ export default function SimpleChart({ data = sampleData }: { data?: Array<Record
     <div className="card">
       <h3 className="text-lg font-medium mb-2">Power (sample)</h3>
       <div style={{ width: '100%', height: 220 }}>
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} initialDimension={{ width: 1, height: 1 }}>
           <LineChart data={data}>
             <CartesianGrid stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3" />
             <XAxis dataKey="name" stroke="var(--muted)" />

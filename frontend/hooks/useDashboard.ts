@@ -6,6 +6,7 @@
  */
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { get } from '../lib/api'
+import { isDemoModeEnabled } from '../lib/demo'
 import type { DashboardSummary, RecoveryMetrics } from '../types/api'
 
 export interface UseDashboardOptions {
@@ -55,7 +56,7 @@ export function useDashboard(opts: UseDashboardOptions = {}): UseDashboardResult
       if (sum.status === 'fulfilled') setSummary(sum.value ?? DEFAULT_SUMMARY)
       if (rec.status === 'fulfilled') setRecovery(rec.value ?? null)
 
-      if (sum.status === 'rejected' && rec.status === 'rejected') {
+      if (sum.status === 'rejected' && rec.status === 'rejected' && !isDemoModeEnabled()) {
         setError('Failed to load dashboard data')
       }
     } catch (e: any) {
